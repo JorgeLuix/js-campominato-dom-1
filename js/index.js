@@ -21,6 +21,14 @@ function start() {
     document.querySelector(".game").classList.toggle("d-none");
     itsabomb(numOfSquares, squareRootNum);
   });
+
+  let score = 0;
+
+function updateScore() {
+  const scoreElement = document.getElementById('score');
+  score++;
+  scoreElement.textContent = `Score: ${score}`;
+}
 }
 
 function itsabomb(level, squaredRoot) {
@@ -40,6 +48,7 @@ function itsabomb(level, squaredRoot) {
     property.style.setProperty("--square-width", `${squareDimension}px`);
   }
   window.onresize = resizeSquare;
+  
 
   // if the grid is 10x10 limit the bomb number to 16
   const numOfBombs =
@@ -132,7 +141,7 @@ function itsabomb(level, squaredRoot) {
       if (bombs.indexOf(this.id) >= 0) {
         /* END OF THE GAME */
         wrapper.classList.add('lost');
-        this.textContent = "💣";
+        this.textContent = "👻";
         this.className = "";
         wrapper.insertBefore(createChild('div', '', ['square'], ''), document.getElementById(this.id));
         wrapper.classList.add("position-relative");
@@ -365,7 +374,59 @@ function itsabomb(level, squaredRoot) {
       }
     });
     document.querySelector('.btnContainer').classList.add('d-none');
+    updateScore();
   }
+  // function theyWin() {
+  //   // ... Resto del codice ...
+  
+  //   // Chiamata alla funzione per aggiornare lo score quando il giocatore vince
+  //   updateScore();
+  
+  //   // Mostra un messaggio di vittoria
+  //   const modal = document.createElement('div');
+  //   modal.classList.add('modal');
+  //   modal.innerHTML = `
+  //     <div class="modal-content">
+  //       <h2>Congratulations!</h2>
+  //       <p>You've won the game!</p>
+  //       <button id="playAgainBtn">Play Again</button>
+  //     </div>
+  //   `;
+  
+  //   // Aggiungi la finestra modale al DOM
+  //   document.body.appendChild(modal);
+  
+  //   // Aggiungi un gestore per il pulsante "Play Again"
+  //   const playAgainBtn = document.getElementById('playAgainBtn');
+  //   playAgainBtn.addEventListener('click', () => {
+  //     // Nascondi la finestra modale
+  //     modal.remove();
+  
+  //     // Avvia una nuova partita
+  //     start();
+  //   });
+  
+  //   // Nascondi altre parti dell'interfaccia di gioco
+  //   document.querySelector('.replay').classList.remove('d-none');
+  //   document.querySelector('h2').classList.add('d-none');
+  //   bombs.forEach((bomb) => {
+  //     const toApply = document.getElementById(bomb);
+  //     toApply.className = "";
+  //     addClasses(toApply, ["square", "flower"]);
+  //     toApply.removeEventListener('click', handler);
+  //   });
+  
+  //   squares.forEach((square) => {
+  //     if (!bombs.includes(square.id)) {
+  //       square.className = "";
+  //       square.textContent = "";
+  //       addClasses(square, ["square", "safe"]);
+  //       square.removeEventListener('click', handler);
+  //     }
+  //   });
+  //   document.querySelector('.btnContainer').classList.add('d-none');
+  // }
+  
   
 }
 
